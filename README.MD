@@ -13,8 +13,8 @@ The testsuite uses Restassured,Lombok,Cucumber
 
 **How to run all Feature-files with the runner**
 
-* in Intellij right-click the runner (CucumberJunitRunner) and select run in Jenkins use gradlewWrapper (make executable)
-  and set task too `-test --rerun-tasks --warning-mode all`
+* in Intellij right-click the runner (CucumberJunitRunner) and select run. 
+  In Jenkins use gradlewWrapper (make executable) and set task too `-test --rerun-tasks --warning-mode all`
 
 **How to run a single feature/scenario**
 
