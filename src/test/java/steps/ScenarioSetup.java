@@ -1,14 +1,10 @@
 package steps;
 
 import helper.PropertyHelper;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 public class ScenarioSetup {
-    private static AbstractSteps abstractSteps;
-
-    public static AbstractSteps abstractSteps(){
-        return abstractSteps;
-    }
 
     @Before("@ProxyApi")
     public void setBaseUrlProxyApiWithAuthentication() {
@@ -23,4 +19,5 @@ public class ScenarioSetup {
         AbstractSteps.getInstance().setBaseURI(PropertyHelper.getProperties("BASE_URL_USER_API"));
         AbstractSteps.getInstance().setUseAuthentication(false);
     }
+
 }

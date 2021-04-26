@@ -16,8 +16,6 @@ public class MovieSteps extends AbstractSteps {
         List<PostMovie> movies = values.stream().map(i -> objectMapper.convertValue(i, PostMovie.class)).collect(Collectors.toList());
         for (PostMovie movie : movies) {
             setResponse(postRequest(movie, "/movies"));
-
-
         }
     }
 }

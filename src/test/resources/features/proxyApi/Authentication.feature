@@ -1,5 +1,5 @@
 @ProxyApi
-Feature: Token
+Feature: Authentication
 
   Scenario Outline: Get token
     Given credentials "<credentials>" are used

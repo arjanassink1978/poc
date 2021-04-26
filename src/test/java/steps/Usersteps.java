@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import pojos.user.AllUsersList;
 import pojos.user.PostSingleUser;
 import pojos.user.User;
@@ -37,7 +38,7 @@ public class Usersteps extends AbstractSteps {
             //TODO Uncomment when delete request is implemented!
 //            setResponse(deleteRequest("/Users/"+allUsers.getId()+"",false));
 //            Assert.assertTrue("User not deleted",getResponse().getStatusCode()==200);
-            throw new Exception("The user allready exists.Did you start with a empty db?");
+            throw new Exception("The user allready exists. Did you start with a empty db?");
         }
     }
 
@@ -64,7 +65,10 @@ public class Usersteps extends AbstractSteps {
         User expectedUser = values.stream().map(i -> objectMapper.convertValue(i, User.class)).collect(Collectors.toList()).get(0);
         if (getResponse().getStatusCode()==200){
             User user = getResponse().getBody().as(User.class);
-            assertThat("expected user is not the same as user from response",user, samePropertyValuesAs(expectedUser));
+            Assert.assertEquals(user.getId(),expectedUser.getId());
+            Assert.assertEquals(user.getUsername(),expectedUser.getUsername());
+            Assert.assertEquals(user.getRole(),expectedUser.getRole());
+            Assert.assertEquals(user.getActive(),expectedUser.getActive());
         }else {
             System.out.println("Step: The userResponse contains if responsecode is 200 skipped, because of responsecode = "+getResponse().getStatusCode()+"");
         }
