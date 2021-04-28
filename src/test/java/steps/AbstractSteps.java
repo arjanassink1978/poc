@@ -6,6 +6,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSenderOptions;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -13,10 +14,12 @@ import lombok.SneakyThrows;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
@@ -107,8 +110,7 @@ public class AbstractSteps {
     @SneakyThrows
     public String getToken() {
         TokenResponse tokenResponse = null;
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        httpClient.setRedirectStrategy(new LaxRedirectStrategy());
+        HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost httpPost = new HttpPost(getBaseURI()+"/tokens/");
         JSONObject json = new JSONObject();
         json.put("username", credentials.getUsername());
